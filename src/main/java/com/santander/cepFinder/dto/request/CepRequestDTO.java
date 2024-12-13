@@ -1,18 +1,11 @@
 package com.santander.cepFinder.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class CepRequestDTO {
 
-    //TODO: Implementar validação
+    @NotNull
     private String cep;
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
 }
