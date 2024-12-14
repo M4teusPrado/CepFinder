@@ -29,7 +29,7 @@ public class CepFinderController {
     @PostMapping
     private ResponseEntity<CepResponseDTO> searchCep(@RequestBody @Valid CepRequestDTO cepRequestDTO) throws ErrorSearchCep {
         CepResponseDTO cepResponseDto = cepService.getCepDetails(cepRequestDTO);
-        loggingService.logConsultaCep(cepRequestDTO.getCep(), cepResponseDto.toString());
+        loggingService.logConsultaCep(cepRequestDTO.getCep(), cepResponseDto);
         return ResponseEntity.ok(cepResponseDto);
     }
 }

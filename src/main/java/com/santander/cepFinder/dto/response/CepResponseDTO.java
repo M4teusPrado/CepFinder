@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true) // Ignora campos desconhecidos no JSON
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CepResponseDTO {
     private String cep;
     private String logradouro;

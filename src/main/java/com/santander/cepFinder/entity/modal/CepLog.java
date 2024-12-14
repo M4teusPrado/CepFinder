@@ -1,8 +1,11 @@
 package com.santander.cepFinder.entity.modal;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "cep_logs")
 public class CepLog {
@@ -14,21 +17,15 @@ public class CepLog {
     @Column(name = "cep")
     private String cep;
 
+    @Column(name = "cidade")
+    private String cidade;
+
+    @Column(name = "estado")
+    private String estado;
+
     @Column(name = "response")
     private String response;
 
     @Column(name = "query_time")
     private LocalDateTime queryTime;
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public void setQueryTime(LocalDateTime queryTime) {
-        this.queryTime = queryTime;
-    }
 }

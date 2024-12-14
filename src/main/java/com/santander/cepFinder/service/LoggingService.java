@@ -1,5 +1,6 @@
 package com.santander.cepFinder.service;
 
+import com.santander.cepFinder.dto.response.CepResponseDTO;
 import com.santander.cepFinder.entity.modal.CepLog;
 import com.santander.cepFinder.repository.CepLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ public class LoggingService {
         this.cepLogRepository = cepLogRepository;
     }
 
-    public void logConsultaCep(String cep, String response) {
+    public void logConsultaCep(String cep, CepResponseDTO response) {
         CepLog cepLog = new CepLog();
         cepLog.setCep(cep);
-        cepLog.setResponse(response);
+        cepLog.setCidade(response.getCidade());
+        cepLog.setEstado(response.getEstado());
+        cepLog.setResponse(response.toString());
         cepLog.setQueryTime(LocalDateTime.now());
 
         cepLogRepository.save(cepLog);
