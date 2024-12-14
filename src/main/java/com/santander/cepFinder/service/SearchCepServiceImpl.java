@@ -24,18 +24,12 @@ public class SearchCepServiceImpl implements SearchCepService {
 
     @Override
     public CepResponseDTO getCepDetails(CepRequestDTO cepDto) throws ErrorSearchCep {
-        String cep = cepDto.getCep();
-        CepResponseDTO cepResponse;
-
         try {
-            cepResponse = externalCepServiceClient.getDetails(cep);
+            return externalCepServiceClient.getDetails(cepDto.getCep());
         } catch (ApiConnectionException e) {
             throw new ErrorApiConnection(e);
         } catch (CepNotFoundException e) {
             throw new ErrorCepNotFound(e);
         }
-
-        System.out.println(cepResponse.getCep());
-        return cepResponse;
     }
 }

@@ -13,4 +13,10 @@ public class CepRequestDTO {
             message = "CEP inválido. O formato deve ser '12345678' ou '12345-678'."
     )
     private String cep;
+
+
+
+    public String getCep() {
+        return cep.replace("-" , "");
+    }
 }

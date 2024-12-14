@@ -18,9 +18,9 @@ public class LoggingService {
         this.cepLogRepository = cepLogRepository;
     }
 
-    public void logConsultaCep(String cep, CepResponseDTO response) {
+    public void logConsultaCep(CepResponseDTO response) {
         CepLog cepLog = new CepLog();
-        cepLog.setCep(cep);
+        cepLog.setCep(response.getCep());
         cepLog.setCidade(response.getCidade());
         cepLog.setEstado(response.getEstado());
         cepLog.setResponse(response.toString());

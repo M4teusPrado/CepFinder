@@ -16,7 +16,6 @@ public class ViaCepImpl implements ExternalCepServiceClient {
     @Override
     public CepResponseDTO getDetails(String cep) throws ApiConnectionException, CepNotFoundException {
         ConecctionApi conn = new ConecctionApi(cep);
-
         return new CepTransformer().transform(conn);
     }
 }
