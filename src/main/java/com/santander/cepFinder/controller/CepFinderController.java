@@ -5,6 +5,7 @@ import com.santander.cepFinder.dto.response.CepResponseDTO;
 import com.santander.cepFinder.dto.response.error.base.ErrorSearchCep;
 import com.santander.cepFinder.service.LoggingService;
 import com.santander.cepFinder.service.SearchCepService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class CepFinderController {
     }
 
     @PostMapping
-    private ResponseEntity<CepResponseDTO> searchCep(@RequestBody CepRequestDTO cepRequestDTO) throws ErrorSearchCep {
+    private ResponseEntity<CepResponseDTO> searchCep(@RequestBody @Valid CepRequestDTO cepRequestDTO) throws ErrorSearchCep {
         CepResponseDTO cepResponseDto = cepService.getCepDetails(cepRequestDTO);
         loggingService.logConsultaCep(cepRequestDTO.getCep(), cepResponseDto.toString());
         return ResponseEntity.ok(cepResponseDto);
