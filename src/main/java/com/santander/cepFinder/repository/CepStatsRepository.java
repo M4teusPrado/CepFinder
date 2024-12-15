@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class  CepStatsRepository {
+public class CepStatsRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -49,20 +49,14 @@ public class  CepStatsRepository {
         sql.append("GROUP BY c.cep ")
                 .append("ORDER BY total_consultas DESC");
 
-        if (filter.getLimit() != 0 ) {
+        if (filter.getLimit() != 0) {
             sql.append(" LIMIT :limit ");
             params.addValue("limit", filter.getLimit());
         }
 
-        // Executando a consulta
-        return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
-
-            String cep = rs.getString("cep");
-            long totalConsultas = rs.getLong("total_consultas");
-
-
-            return new FrequentlyConsultedCepDTO(cep, totalConsultas);
-        });
+        return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) ->
+                new FrequentlyConsultedCepDTO(rs.getString("cep"), rs.getLong("total_consultas"))
+        );
     }
 
 

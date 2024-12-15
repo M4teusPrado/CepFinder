@@ -6,6 +6,5 @@ import com.santander.cepFinder.filter.CepStatsFilter;
 import java.util.List;
 
 public interface CepStatsService {
-
     List<FrequentlyConsultedCepDTO> getMostFrequentlyConsultedCeps(CepStatsFilter filter);
 }
