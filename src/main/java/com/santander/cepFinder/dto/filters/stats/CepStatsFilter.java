@@ -1,4 +1,4 @@
-package com.santander.cepFinder.filter.stats;
+package com.santander.cepFinder.dto.filters.stats;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

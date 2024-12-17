@@ -2,8 +2,8 @@ package com.santander.cepFinder.repository;
 
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
-import com.santander.cepFinder.filter.stats.AggregatedCepStateFilter;
-import com.santander.cepFinder.filter.stats.CepStatsFilter;
+import com.santander.cepFinder.dto.filters.stats.AggregatedCepStateFilter;
+import com.santander.cepFinder.dto.filters.stats.CepStatsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

@@ -1,4 +1,4 @@
-package com.santander.cepFinder.filter.stats;
+package com.santander.cepFinder.dto.filters.stats;
 
 import java.time.LocalDateTime;
 
