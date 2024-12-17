@@ -4,7 +4,13 @@ import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
 import com.santander.cepFinder.dto.filters.stats.AggregatedCepStateFilter;
 import com.santander.cepFinder.dto.filters.stats.CepStatsFilter;
+import com.santander.cepFinder.dto.response.error.base.ErrorResponse;
 import com.santander.cepFinder.service.CepStatsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +32,18 @@ public class CepStatsController {
     }
 
     @GetMapping("/ceps-mais-consultados")
+    @Operation(
+            summary = "Obter os CEPs mais consultados",
+            description = "Retorna a lista de CEPs mais consultados com base no filtro de parâmetros fornecidos."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de CEPs mais consultados retornada com sucesso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FrequentlyConsultedCepDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida, parâmetros incorretos.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno ao buscar os CEPs mais consultados.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
+    })
     public ResponseEntity<List<FrequentlyConsultedCepDTO>> getTopConsultedCeps(
             @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
             @RequestParam(value = "dataInicial", required = false) String startDate,
@@ -45,6 +63,18 @@ public class CepStatsController {
     }
 
     @GetMapping("/estados")
+    @Operation(
+            summary = "Obter estatísticas de alocação de CEP por estado",
+            description = "Retorna as estatísticas de alocação de CEP por estado, com base no filtro de parâmetros fornecidos."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estatísticas de alocação de CEP por estado retornadas com sucesso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FrequentlyConsultedStateDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida, parâmetros incorretos.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno ao buscar as estatísticas de alocação de CEP por estado.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
+    })
     public ResponseEntity<List<FrequentlyConsultedStateDTO>> getStateCepAllocationStats(
             @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
             @RequestParam(value = "dataInicial", required = false) String startDate,
@@ -58,5 +88,4 @@ public class CepStatsController {
         List<FrequentlyConsultedStateDTO> stateStats = statsService.getStateCepAllocationStats(filter);
         return ResponseEntity.ok(stateStats);
     }
-
 }
