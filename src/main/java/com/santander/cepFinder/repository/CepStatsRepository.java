@@ -39,11 +39,11 @@ public class CepStatsRepository {
         }
         if (filter.getStartDate() != null) {
             sql.append("AND c.query_time >= :startDate ");
-            params.addValue("startDate", filter.getStartDate());
+            params.addValue("startDate", filter.getStartDateTime());
         }
         if (filter.getEndDate() != null) {
             sql.append("AND c.query_time <= :endDate ");
-            params.addValue("endDate", filter.getEndDate());
+            params.addValue("endDate", filter.getEndDateTime());
         }
 
         sql.append("GROUP BY c.cep ")

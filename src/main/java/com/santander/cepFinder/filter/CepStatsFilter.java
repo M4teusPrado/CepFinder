@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Data
 public class CepStatsFilter {
 
@@ -26,4 +29,15 @@ public class CepStatsFilter {
     @JsonProperty("estado")
     @Schema(description = "Sigla do estado no formato 'XX'.", example = "SP")
     private String state;
+
+
+    public LocalDateTime getStartDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        return LocalDateTime.parse(startDate + " 00:00:00.000000", formatter); // Assume início do dia
+    }
+
+    public LocalDateTime getEndDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        return LocalDateTime.parse(endDate + " 23:59:59.999999", formatter); // Assume fim do dia
+    }
 }
