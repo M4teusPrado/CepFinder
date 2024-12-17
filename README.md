@@ -1,4 +1,4 @@
- CepFinder API
+# CepFinder API
 
 A CepFinder API é um serviço REST que permite buscar informações detalhadas de endereços a partir de um CEP fornecido, além de oferecer recursos para monitorar as consultas realizadas, como o ranking dos CEPs mais consultados.
 
@@ -8,6 +8,21 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - **Registro de Logs**: Grava logs das consultas realizadas para monitoramento.
 - **Ranking de CEPs Mais Consultados**: Lista os CEPs mais frequentemente consultados com base em filtros como datas, cidade e estado.
 - **Estatísticas de CEP por Cidade e Estado**: Fornece dados agregados sobre a distribuição dos CEPs consultados por cidade e estado.
+
+
+## Como Rodar
+1. Clone o repositório.
+2. Execute o comando mvn spring-boot:run para iniciar o servidor.
+3. Acesse a API via localhost:8080
+
+
+## Dependências
+- Spring Boot: Framework principal para a construção da API.
+- Swagger/OpenAPI: Para documentação automática da API.
+- Jakarta Validation: Para validação de dados de entrada.
+- Lombok: Para simplificar a criação de getters, setters e construtores.
+- JPA/Hibernate: Para manipulação de dados no banco de dados.
+
 
 ## Estrutura do projeto
 ![image](https://github.com/user-attachments/assets/68ec76e8-e447-4817-91d9-ad6eaeca406b)
@@ -125,15 +140,4 @@ Após a subida da aplicação localmente acesse a seguinte URL:
 - **URL de acesso**: [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
 
 
-## Dependências
-- Spring Boot: Framework principal para a construção da API.
-- Swagger/OpenAPI: Para documentação automática da API.
-- Jakarta Validation: Para validação de dados de entrada.
-- Lombok: Para simplificar a criação de getters, setters e construtores.
-- JPA/Hibernate: Para manipulação de dados no banco de dados.
 
-
-## Como Rodar
-1. Clone o repositório.
-2. Execute o comando mvn spring-boot:run para iniciar o servidor.
-3. Acesse a API via localhost:8080
