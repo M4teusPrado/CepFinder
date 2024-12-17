@@ -53,13 +53,13 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - **Descrição**: Retorna a lista de CEPs mais consultados com base no filtro de parâmetros fornecidos.
 
 **Parâmetros**
-| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
-| -------------   | ------------- | -------------                                   | -------------  |
-| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
-| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
-| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
-| `cidade`        | String        | Filtra por cidade                               |       -        |
-| `estado`        | String        | Filtra por estado                               |       -        |
+| Parâmetro       | Tipo          | Obrigatoriedade |  Descrição                                      | Padrão         |
+| -------------   | ------------- | -------------   | -------------                                   | -------------  |
+| `limite`        | Integer       | -               | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | -               | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | -               | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
+| `cidade`        | String        | -               | Filtra por cidade                               |       -        |
+| `estado`        | String        | -               | Filtra por estado                               |       -        |
 
 
 #### Response
@@ -78,12 +78,13 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - **Descrição**: Retorna a lista de CEPs mais consultados por cidade, com base no filtro de parâmetros fornecidos.
 
 **Parâmetros**
-| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
-| -------------   | ------------- | -------------                                   | -------------  |
-| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
-| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
-| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
-| `estado`        | String        | Filtra por estado                               |       -        |
+| Parâmetro       | Tipo          | Obrigatoriedade |  Descrição                                      | Padrão         |
+| -------------   | ------------- | -------------   | -------------                                   | -------------  |
+| `limite`        | Integer       | -               | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | -               | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | -               | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
+| `estado`        | String        | sim             | Filtra por estado                               |       -        |
+
 
 
 #### Response
@@ -111,12 +112,11 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - **Descrição**: Retorna as estatísticas de alocação de CEP por estado, com base no filtro de parâmetros fornecidos.
 
 **Parâmetros**
-| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
-| -------------   | ------------- | -------------                                   | -------------  |
-| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
-| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
-| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
-
+| Parâmetro       | Tipo          | Obrigatoriedade |  Descrição                                      | Padrão         |
+| -------------   | ------------- | -------------   | -------------                                   | -------------  |
+| `limite`        | Integer       | -               | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | -               | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | -               | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
 
 #### Response
 200 OK: Lista de CEPs mais consultados por cidade retornada com sucesso.
