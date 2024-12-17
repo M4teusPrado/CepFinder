@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ceps/stats")
+@RequestMapping("${api.base.url}/estatisticas")
 public class CepStatsController {
 
     private final CepStatsService statsService;
@@ -25,7 +25,7 @@ public class CepStatsController {
         this.statsService = statsService;
     }
 
-    @GetMapping("/ranking")
+    @GetMapping("/ceps-mais-consultados")
     public ResponseEntity<List<FrequentlyConsultedCepDTO>> getTopConsultedCeps(
             @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
             @RequestParam(value = "dataInicial", required = false) String startDate,
@@ -44,7 +44,7 @@ public class CepStatsController {
         return ResponseEntity.ok(topCeps);
     }
 
-    @GetMapping("/ranking/estados")
+    @GetMapping("/estados")
     public ResponseEntity<List<FrequentlyConsultedStateDTO>> getStateCepAllocationStats(
             @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
             @RequestParam(value = "dataInicial", required = false) String startDate,

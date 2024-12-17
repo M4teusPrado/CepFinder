@@ -32,13 +32,15 @@ public class CepStatsRepository {
         MapSqlParameterSource params = new MapSqlParameterSource();
 
         if (filter.getCity() != null) {
-            sql.append("AND c.cidade = :cidade ");
-            params.addValue("cidade", filter.getCity());
+            sql.append("AND UPPER(c.cidade) = :cidade ");
+            params.addValue("cidade", filter.getCity().toUpperCase());
         }
+
         if (filter.getState() != null) {
-            sql.append("AND c.estado = :estado ");
-            params.addValue("estado", filter.getState());
+            sql.append("AND UPPER(c.estado) = :estado ");
+            params.addValue("estado", filter.getState().toUpperCase());
         }
+
         if (filter.getStartDate() != null) {
             sql.append("AND c.query_time >= :startDate ");
             params.addValue("startDate", filter.getStartDateTime());

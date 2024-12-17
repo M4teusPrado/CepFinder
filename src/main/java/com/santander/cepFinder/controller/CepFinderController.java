@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/ceps")
+@RequestMapping("${api.base.url}")
 public class CepFinderController {
 
     private final SearchCepService cepService;
@@ -26,7 +26,7 @@ public class CepFinderController {
         this.loggingService = loggingService;
     }
 
-    @PostMapping
+    @PostMapping("/buscar")
     private ResponseEntity<CepResponseDTO> searchCep(@RequestBody @Valid CepRequestDTO cepRequestDTO) throws ErrorSearchCep {
         CepResponseDTO cepResponseDto = cepService.getCepDetails(cepRequestDTO);
         loggingService.logConsultaCep(cepResponseDto);
