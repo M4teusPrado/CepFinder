@@ -1,14 +1,19 @@
 package com.santander.cepFinder.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class FrequentlyConsultedCepDTO {
-    private String cep;
-    private long totalConsultas;
 
-    public FrequentlyConsultedCepDTO(String cep, long totalConsultas) {
-        this.cep = cep;
-        this.totalConsultas = totalConsultas;
+    @JsonProperty("cep")
+    private String zipCode;
+
+    @JsonProperty("totalConsultas")
+    private long totalQueries;
+
+    public FrequentlyConsultedCepDTO(String zipCode, long totalQueries) {
+        this.zipCode = zipCode;
+        this.totalQueries = totalQueries;
     }
 }

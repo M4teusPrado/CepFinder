@@ -7,13 +7,19 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CepResponseDTO {
-    private String cep;
-    private String logradouro;
-    private String bairro;
+
+    @JsonProperty("cep")
+    private String zipCode;
+
+    @JsonProperty("logradouro")
+    private String street;
+
+    @JsonProperty("bairro")
+    private String neighborhood;
 
     @JsonProperty("localidade")
-    private String cidade;
+    private String city;
 
     @JsonProperty("uf")
-    private String estado;
+    private String state;
 }

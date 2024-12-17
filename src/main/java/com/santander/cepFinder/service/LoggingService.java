@@ -6,8 +6,6 @@ import com.santander.cepFinder.repository.CepLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class LoggingService {
 
@@ -19,13 +17,6 @@ public class LoggingService {
     }
 
     public void logConsultaCep(CepResponseDTO response) {
-        CepLog cepLog = new CepLog();
-        cepLog.setCep(response.getCep());
-        cepLog.setCidade(response.getCidade());
-        cepLog.setEstado(response.getEstado());
-        cepLog.setResponse(response.toString());
-        cepLog.setQueryTime(LocalDateTime.now());
-
-        cepLogRepository.save(cepLog);
+        cepLogRepository.save(new CepLog(response));
     }
 }

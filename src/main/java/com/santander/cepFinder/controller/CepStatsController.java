@@ -3,12 +3,10 @@ package com.santander.cepFinder.controller;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
 import com.santander.cepFinder.filter.CepStatsFilter;
 import com.santander.cepFinder.service.CepStatsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,14 +22,7 @@ public class CepStatsController {
     }
 
     @GetMapping("/ranking")
-    public ResponseEntity<List<FrequentlyConsultedCepDTO>> getTopConsultedCeps(
-            @RequestParam(defaultValue = "10") int limit,
-            @RequestParam(required = false) String startDate,
-            @RequestParam(required = false) String endDate,
-            @RequestParam(required = false) String city,
-            @RequestParam(required = false) String state) {
-
-        CepStatsFilter filter = new CepStatsFilter(limit, startDate, endDate, city, state);
+    public ResponseEntity<List<FrequentlyConsultedCepDTO>> getTopConsultedCeps(@Valid @ModelAttribute CepStatsFilter filter) {
         List<FrequentlyConsultedCepDTO> topCeps = statsService.getMostFrequentlyConsultedCeps(filter);
         return ResponseEntity.ok(topCeps);
     }

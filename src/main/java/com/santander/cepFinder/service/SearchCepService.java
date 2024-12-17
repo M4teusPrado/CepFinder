@@ -5,5 +5,5 @@ import com.santander.cepFinder.dto.response.CepResponseDTO;
 import com.santander.cepFinder.dto.response.error.base.ErrorSearchCep;
 
 public interface SearchCepService {
-    CepResponseDTO getCepDetails(CepRequestDTO cep) throws ErrorSearchCep;
+    CepResponseDTO getCepDetails(CepRequestDTO dto) throws ErrorSearchCep;
 }
