@@ -117,3 +117,17 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
   }
 ]
 ```
+
+
+## Dependências
+- Spring Boot: Framework principal para a construção da API.
+- Swagger/OpenAPI: Para documentação automática da API.
+- Jakarta Validation: Para validação de dados de entrada.
+- Lombok: Para simplificar a criação de getters, setters e construtores.
+- JPA/Hibernate: Para manipulação de dados no banco de dados.
+
+
+## Como Rodar
+1. Clone o repositório.
+2. Execute o comando mvn spring-boot:run para iniciar o servidor.
+3. Acesse a API via localhost:8080
