@@ -1,4 +1,4 @@
-package com.santander.cepFinder.service;
+package com.santander.cepFinder.service.impl;
 
 import com.santander.cepFinder.dto.request.CepRequestDTO;
 import com.santander.cepFinder.dto.response.CepResponseDTO;
@@ -8,6 +8,7 @@ import com.santander.cepFinder.dto.response.error.base.ErrorSearchCep;
 import com.santander.cepFinder.integration.ApiConnectionException;
 import com.santander.cepFinder.integration.CepNotFoundException;
 import com.santander.cepFinder.integration.ExternalCepServiceClient;
+import com.santander.cepFinder.service.SearchCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,9 @@
 package com.santander.cepFinder.controller;
 
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
-import com.santander.cepFinder.filter.CepStatsFilter;
+import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
+import com.santander.cepFinder.filter.stats.AggregatedCepStateFilter;
+import com.santander.cepFinder.filter.stats.CepStatsFilter;
 import com.santander.cepFinder.service.CepStatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,6 @@ public class CepStatsController {
             @RequestParam(value = "cidade", required = false) String city,
             @RequestParam(value = "estado", required = false) String state) {
 
-        // Criação do objeto CepStatsFilter e configuração dos campos
         CepStatsFilter filter = new CepStatsFilter();
         filter.setLimit(limit);
         filter.setStartDate(startDate);
@@ -39,8 +40,23 @@ public class CepStatsController {
         filter.setCity(city);
         filter.setState(state);
 
-        // Obtém o ranking com base no filtro
         List<FrequentlyConsultedCepDTO> topCeps = statsService.getMostFrequentlyConsultedCeps(filter);
         return ResponseEntity.ok(topCeps);
     }
+
+    @GetMapping("/ranking/estados")
+    public ResponseEntity<List<FrequentlyConsultedStateDTO>> getStateCepAllocationStats(
+            @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
+            @RequestParam(value = "dataInicial", required = false) String startDate,
+            @RequestParam(value = "dataFinal", required = false) String endDate) {
+
+        AggregatedCepStateFilter filter = new AggregatedCepStateFilter();
+        filter.setLimit(limit);
+        filter.setStartDate(startDate);
+        filter.setEndDate(endDate);
+
+        List<FrequentlyConsultedStateDTO> stateStats = statsService.getStateCepAllocationStats(filter);
+        return ResponseEntity.ok(stateStats);
+    }
+
 }

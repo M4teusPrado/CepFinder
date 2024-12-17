@@ -1,4 +1,4 @@
-package com.santander.cepFinder.filter;
+package com.santander.cepFinder.filter.stats;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,11 +7,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 @Data
-public class CepStatsFilter {
+public abstract class BaseFilterStats implements FilterStatsInterface {
 
     @JsonProperty("limite")
-    @Schema(description = "Limite de registros a serem retornados.", example = "10", defaultValue = "10")
+    @Schema(description = "Limite de registros AggregatedCepStateFilter serem retornados.", example = "10", defaultValue = "10")
     private int limit;
 
     @JsonProperty("dataInicial")
@@ -21,14 +22,6 @@ public class CepStatsFilter {
     @JsonProperty("dataFinal")
     @Schema(description = "Data final para o filtro no formato 'yyyy-MM-dd'.", example = "2024-01-31")
     private String endDate;
-
-    @JsonProperty("cidade")
-    @Schema(description = "Nome da cidade para o filtro.", example = "São Paulo")
-    private String city;
-
-    @JsonProperty("estado")
-    @Schema(description = "Sigla do estado no formato 'XX'.", example = "SP")
-    private String state;
 
 
     public LocalDateTime getStartDateTime() {

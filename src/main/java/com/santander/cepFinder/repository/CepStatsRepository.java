@@ -1,7 +1,9 @@
 package com.santander.cepFinder.repository;
 
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
-import com.santander.cepFinder.filter.CepStatsFilter;
+import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
+import com.santander.cepFinder.filter.stats.AggregatedCepStateFilter;
+import com.santander.cepFinder.filter.stats.CepStatsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -60,4 +62,35 @@ public class CepStatsRepository {
     }
 
 
+    public List<FrequentlyConsultedStateDTO> findStateCepAllocationStats(AggregatedCepStateFilter filter) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT c.estado, COUNT(DISTINCT c.cep) AS total_ceps ")
+                .append("FROM CEP_LOGS c ")
+                .append("WHERE 1=1 ");
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+
+        if (filter.getStartDate() != null) {
+            sql.append("AND c.query_time >= :startDate ");
+            params.addValue("startDate", filter.getStartDateTime());
+        }
+
+        if (filter.getEndDate() != null) {
+            sql.append("AND c.query_time <= :endDate ");
+            params.addValue("endDate", filter.getEndDateTime());
+        }
+
+        sql.append("GROUP BY c.estado ")
+                .append("ORDER BY total_ceps DESC");
+
+        if (filter.getLimit() != 0) {
+            sql.append(" LIMIT :limit ");
+            params.addValue("limit", filter.getLimit());
+        }
+
+        return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) ->
+                new FrequentlyConsultedStateDTO(rs.getString("estado"), rs.getLong("total_ceps"))
+        );
+    }
 }

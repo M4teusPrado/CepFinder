@@ -1,4 +1,4 @@
-package com.santander.cepFinder.entity.modal;
+package com.santander.cepFinder.modal;
 
 import com.santander.cepFinder.dto.response.CepResponseDTO;
 import jakarta.persistence.*;
