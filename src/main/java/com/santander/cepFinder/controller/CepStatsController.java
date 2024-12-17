@@ -1,6 +1,8 @@
 package com.santander.cepFinder.controller;
 
+import com.santander.cepFinder.dto.filters.stats.AggregatedCepCityFilter;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
+import com.santander.cepFinder.dto.response.FrequentlyConsultedCityDTO;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
 import com.santander.cepFinder.dto.filters.stats.AggregatedCepStateFilter;
 import com.santander.cepFinder.dto.filters.stats.CepStatsFilter;
@@ -87,5 +89,35 @@ public class CepStatsController {
 
         List<FrequentlyConsultedStateDTO> stateStats = statsService.getStateCepAllocationStats(filter);
         return ResponseEntity.ok(stateStats);
+    }
+
+
+    @GetMapping("/ceps-mais-consultados-cidade")
+    @Operation(
+            summary = "Obter os CEPs mais consultados por cidade",
+            description = "Retorna a lista de CEPs mais consultados por cidade, com base no filtro de parâmetros fornecidos."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de CEPs mais consultados por cidade retornada com sucesso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FrequentlyConsultedCityDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida, parâmetros incorretos.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno ao buscar os CEPs mais consultados por cidade.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<List<FrequentlyConsultedCityDTO>> getTopConsultedCepsByCity(
+            @RequestParam(value = "limite", required = false, defaultValue = "10") int limit,
+            @RequestParam(value = "dataInicial", required = false) String startDate,
+            @RequestParam(value = "dataFinal", required = false) String endDate,
+            @RequestParam(value = "estado", required = true) String state) {
+
+        AggregatedCepCityFilter filter = new AggregatedCepCityFilter();
+        filter.setLimit(limit);
+        filter.setStartDate(startDate);
+        filter.setEndDate(endDate);
+        filter.setState(state);
+
+        List<FrequentlyConsultedCityDTO> topCepsByCity = statsService.getMostFrequentlyConsultedCepsByCity(filter);
+        return ResponseEntity.ok(topCepsByCity);
     }
 }

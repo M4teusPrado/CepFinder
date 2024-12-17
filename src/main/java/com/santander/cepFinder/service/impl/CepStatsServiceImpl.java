@@ -1,6 +1,8 @@
 package com.santander.cepFinder.service.impl;
 
+import com.santander.cepFinder.dto.filters.stats.AggregatedCepCityFilter;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
+import com.santander.cepFinder.dto.response.FrequentlyConsultedCityDTO;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
 import com.santander.cepFinder.dto.filters.stats.AggregatedCepStateFilter;
 import com.santander.cepFinder.dto.filters.stats.CepStatsFilter;
@@ -29,5 +31,10 @@ public class CepStatsServiceImpl implements CepStatsService {
     @Override
     public List<FrequentlyConsultedStateDTO> getStateCepAllocationStats(AggregatedCepStateFilter filter) {
         return cepStatsRepository.findStateCepAllocationStats(filter);
+    }
+
+    @Override
+    public List<FrequentlyConsultedCityDTO> getMostFrequentlyConsultedCepsByCity(AggregatedCepCityFilter filter) {
+        return cepStatsRepository.findFrequentlyConsultedCepsByCity(filter);
     }
 }

@@ -1,6 +1,8 @@
 package com.santander.cepFinder.repository;
 
+import com.santander.cepFinder.dto.filters.stats.AggregatedCepCityFilter;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedCepDTO;
+import com.santander.cepFinder.dto.response.FrequentlyConsultedCityDTO;
 import com.santander.cepFinder.dto.response.FrequentlyConsultedStateDTO;
 import com.santander.cepFinder.dto.filters.stats.AggregatedCepStateFilter;
 import com.santander.cepFinder.dto.filters.stats.CepStatsFilter;
@@ -95,4 +97,44 @@ public class CepStatsRepository {
                 new FrequentlyConsultedStateDTO(rs.getString("estado"), rs.getLong("total_ceps"))
         );
     }
+
+        public List<FrequentlyConsultedCityDTO> findFrequentlyConsultedCepsByCity(AggregatedCepCityFilter filter) {
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT c.cidade, COUNT(c.cep) AS total_consultas ")
+                    .append("FROM CEP_LOGS c ")
+                    .append("WHERE 1=1 ");
+
+            MapSqlParameterSource params = new MapSqlParameterSource();
+
+            // Apply filters based on provided parameters
+            if (filter.getState() != null) {
+                sql.append("AND UPPER(c.estado) = :estado ");
+                params.addValue("estado", filter.getState().toUpperCase());
+            }
+
+            if (filter.getStartDate() != null) {
+                sql.append("AND c.query_time >= :startDate ");
+                params.addValue("startDate", filter.getStartDateTime());
+            }
+
+            if (filter.getEndDate() != null) {
+                sql.append("AND c.query_time <= :endDate ");
+                params.addValue("endDate", filter.getEndDateTime());
+            }
+
+            // Group by city and order by total consultations (DESC)
+            sql.append("GROUP BY c.cidade ")
+                    .append("ORDER BY total_consultas DESC");
+
+            // Apply limit if specified
+            if (filter.getLimit() != 0) {
+                sql.append(" LIMIT :limit ");
+                params.addValue("limit", filter.getLimit());
+            }
+
+            // Execute the query and return the result
+            return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) ->
+                    new FrequentlyConsultedCityDTO(rs.getString("cidade"), rs.getLong("total_consultas"))
+            );
+        }
 }
