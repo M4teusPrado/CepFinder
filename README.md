@@ -25,12 +25,11 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - 200 OK: Detalhes do CEP encontrados com sucesso
 ```
 {
-  "cep": "01001000",
-  "logradouro": "Praça da Sé",
-  "bairro": "Sé",
-  "localidade": "São Paulo",
-  "uf": "SP",
-  "ibge": "3550308"
+    "cep": "18010-090",
+    "logradouro": "Rua José Miguel Saker Filho",
+    "bairro": "Centro",
+    "localidade": "Sorocaba",
+    "uf": "SP"
 }
 ```
 ### Obter os CEPs Mais Consultados
@@ -39,10 +38,82 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 - **Descrição**: Retorna a lista de CEPs mais consultados com base no filtro de parâmetros fornecidos.
 
 **Parâmetros**
-| Parâmetro     | Tipo          | Descrição                                       | Padrão         |
-| ------------- | ------------- | -------------                                   | -------------  |
-| limite        | Integer       | Limite de resultados retornados                 |       10       |
-| dataInicial   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
-| dataFinal     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
-| cidade        | String        | Filtra por cidade                               |       -        |
-| estado        | String        | Filtra por estado                               |       -        |
+| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
+| -------------   | ------------- | -------------                                   | -------------  |
+| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
+| `cidade`        | String        | Filtra por cidade                               |       -        |
+| `estado`        | String        | Filtra por estado                               |       -        |
+
+
+#### Response
+200 OK: Lista de CEPs mais consultados retornada com sucesso.
+```
+[
+    {
+        "cep": "18117-240",
+        "totalConsultas": 1
+    }
+]
+```
+### Obter os CEPs Mais Consultados por Cidade
+- **URL**: `/estatisticas/cidade`
+- **Método**: `GET`
+- **Descrição**: Retorna a lista de CEPs mais consultados por cidade, com base no filtro de parâmetros fornecidos.
+
+**Parâmetros**
+| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
+| -------------   | ------------- | -------------                                   | -------------  |
+| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
+| `estado`        | String        | Filtra por estado                               |       -        |
+
+
+#### Response
+200 OK: Lista de CEPs mais consultados por cidade retornada com sucesso.
+```
+[
+    {
+        "cidade": "Sorocaba",
+        "totalConsultas": 4
+    },
+    {
+        "cidade": "Campinas",
+        "totalConsultas": 1
+    },
+    {
+        "cidade": "Votorantim",
+        "totalConsultas": 1
+    }
+]
+```
+
+### Obter os CEPs Mais Consultados por Estado
+- **URL**: `/estatisticas/estado`
+- **Método**: `GET`
+- **Descrição**: Retorna as estatísticas de alocação de CEP por estado, com base no filtro de parâmetros fornecidos.
+
+**Parâmetros**
+| Parâmetro       | Tipo          | Descrição                                       | Padrão         |
+| -------------   | ------------- | -------------                                   | -------------  |
+| `limite`        | Integer       | Limite de resultados retornados                 |       10       |
+| `dataInicial`   | String        | Data inicial para filtro (formato: yyyy-MM-dd)  |       -        |
+| `dataFinal`     | String        | Data final para filtro (formato: yyyy-MM-dd)    |       -        |
+
+
+#### Response
+200 OK: Lista de CEPs mais consultados por cidade retornada com sucesso.
+```
+[
+  {
+      "estado": "SP",
+      "totalConsultas": 5
+  },
+  {
+    "estado": "RJ",
+    "totalConsultas": 3
+  }
+]
+```
