@@ -36,7 +36,9 @@ jobs:
       - name: Pull image from docker hub
         run: |
           sudo docker pull ${{secrets.DOCKER_USERNAME}}/cepfinder:latest
-
+      - name: Remove docker container
+        run: |
+          docker rm -f
       - name: Run docker container
         run: |
           sudo docker run -d -p 8080:8080 \
