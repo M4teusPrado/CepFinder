@@ -28,6 +28,10 @@ jobs:
         needs: build
         runs-on: self-hosted  # A máquina onde o Docker e Docker Compose estão configurados
         steps:
+          - name: Copy SSH private key
+            run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/private_key.pem
+          - name: Set proper permissions on the SSH key
+            run: chmod 600 /tmp/private_key.pem
           - name: Copy docker-compose.yml to the deploy machine
             run: |
               scp -i docker-compose.yml ec2-user@ec2-54-174-204-170.compute-1.amazonaws.com:/home/ec2-user
