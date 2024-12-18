@@ -22,4 +22,8 @@ public class CepResponseDTO {
 
     @JsonProperty("uf")
     private String state;
+
+    public boolean addressValid(){
+        return this.zipCode != null && this.street != null;
+    }
 }

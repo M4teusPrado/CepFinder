@@ -1,3 +1,5 @@
+./run.sh
+
 # Parar todos os contêineres
 sudo docker stop $(sudo docker ps -q -a)
 

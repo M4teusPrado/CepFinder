@@ -3,9 +3,11 @@ package com.santander.cepFinder.service.impl;
 import com.santander.cepFinder.dto.request.CepRequestDTO;
 import com.santander.cepFinder.dto.response.CepResponseDTO;
 import com.santander.cepFinder.dto.response.error.ErrorApiConnection;
+import com.santander.cepFinder.dto.response.error.ErrorCepDetailsNotAvailable;
 import com.santander.cepFinder.dto.response.error.ErrorCepNotFound;
 import com.santander.cepFinder.dto.response.error.base.ErrorSearchCep;
 import com.santander.cepFinder.integration.ApiConnectionException;
+import com.santander.cepFinder.integration.CepDetailsNotAvailableException;
 import com.santander.cepFinder.integration.CepNotFoundException;
 import com.santander.cepFinder.integration.ExternalCepServiceClient;
 import com.santander.cepFinder.service.SearchCepService;
@@ -31,6 +33,8 @@ public class SearchCepServiceImpl implements SearchCepService {
             throw new ErrorApiConnection(e);
         } catch (CepNotFoundException e) {
             throw new ErrorCepNotFound(e);
+        } catch (CepDetailsNotAvailableException e) {
+            throw new ErrorCepDetailsNotAvailable(e);
         }
     }
 }
