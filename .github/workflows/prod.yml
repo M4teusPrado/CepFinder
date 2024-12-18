@@ -24,3 +24,14 @@ jobs:
             run: docker build -t  ${{secrets.DOCKER_USERNAME}}/cepfinder .
           - name: Push image docker
             run: docker push ${{secrets.DOCKER_USERNAME}}/cepfinder
+    deploy:
+        needs: build
+        runs-on: self-hosted  # A máquina onde o Docker e Docker Compose estão configurados
+        steps:
+          - name: Copy docker-compose.yml to the deploy machine
+            run: |
+              scp -i docker-compose.yml ec2-user@ec2-54-174-204-170.compute-1.amazonaws.com:/home/ec2-user
+
+          - name: SSH to deploy machine and run Docker Compose
+            run: |
+              ssh -i ec2-user@ec2-54-174-204-170.compute-1.amazonaws.com "cd /home/ec2-user && docker-compose up -d"
