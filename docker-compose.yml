@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: mateussp18/cepfinder
     container_name: app-cepfinder
     ports:
       - "8080:8080"
