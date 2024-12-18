@@ -69,7 +69,7 @@ public class CepStatsRepository {
     public List<FrequentlyConsultedStateDTO> findStateCepAllocationStats(AggregatedCepStateFilter filter) {
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT c.estado, COUNT(DISTINCT c.cep) AS total_ceps ")
+        sql.append("SELECT c.estado, COUNT(c.cep) AS total_ceps ")
                 .append("FROM CEP_LOGS c ")
                 .append("WHERE 1=1 ");
 
