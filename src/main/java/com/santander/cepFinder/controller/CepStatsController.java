@@ -92,7 +92,7 @@ public class CepStatsController {
     }
 
 
-    @GetMapping("/ceps-mais-consultados-cidade")
+    @GetMapping("/cidade")
     @Operation(
             summary = "Obter os CEPs mais consultados por cidade",
             description = "Retorna a lista de CEPs mais consultados por cidade, com base no filtro de parâmetros fornecidos."
