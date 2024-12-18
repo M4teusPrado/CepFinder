@@ -38,7 +38,7 @@ jobs:
           sudo docker pull ${{secrets.DOCKER_USERNAME}}/cepfinder:latest
       - name: Remove docker container
         run: |
-          docker rm -f app-cepfinder
+          sudo docker rm -f app-cepfinder
       - name: Run docker container
         run: |
           sudo docker run -d -p 8080:8080 \
