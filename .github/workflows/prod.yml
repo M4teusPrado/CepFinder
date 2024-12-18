@@ -24,8 +24,3 @@ jobs:
             run: docker build -t  ${{secrets.DOCKER_USERNAME}}/cepFinder .
           - name: Push image docker
             run: docker push ${{secrets.DOCKER_USERNAME}}/cepFinder
-
-    deploy:
-        needs: build
-        runs-on: self-hosted
-        steps:
