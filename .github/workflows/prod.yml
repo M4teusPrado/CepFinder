@@ -30,6 +30,7 @@ jobs:
         run: docker push ${{secrets.DOCKER_USERNAME}}/cepfinder
 
   deploy:
+    name: deploy to EC2
     needs: build
     runs-on: self-hosted  # A máquina onde o Docker e Docker Compose estão configurados
     steps:
