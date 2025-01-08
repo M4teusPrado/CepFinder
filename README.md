@@ -137,7 +137,7 @@ A CepFinder API é um serviço REST que permite buscar informações detalhadas 
 Para mais detalhes sobre os endpoints e como utilizá-los, você pode acessar a interface do Swagger da aplicação. Ela fornece uma visão interativa e documentação detalhada de todas as rotas disponíveis.
 
 Após a subida da aplicação localmente acesse a seguinte URL: 
-- **URL de acesso**: [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
+- **URL de acesso**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 
 
